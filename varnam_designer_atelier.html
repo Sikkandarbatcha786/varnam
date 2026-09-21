@@ -1,0 +1,3213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>VARNAM — Designer Atelier</title>
+
+<meta name="description" content="VARNAM Designer Atelier — Designer Sarees, Aari Blouses and Dhavanis.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=DM+Sans:wght@400;500;600&family=Italianno&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   ROOT
+========================= */
+
+:root{
+  --wine:#651b2d;
+  --deep:#3b101c;
+  --gold:#b58a4a;
+  --gold2:#d6b878;
+  --ivory:#f7f1e7;
+  --sand:#e9ddcc;
+  --ink:#241a17;
+  --muted:#74665d;
+  --white:#fffdf9;
+
+  --line:rgba(101,27,45,.16);
+
+  --serif:"Bodoni Moda",Georgia,serif;
+  --script:"Italianno",cursive;
+  --sans:"DM Sans",Arial,sans-serif;
+
+  --ease:cubic-bezier(.22,1,.36,1);
+
+  --shadow:0 24px 70px rgba(50,22,18,.14);
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--ivory);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+body.menu-open{
+  overflow:hidden;
+}
+
+img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+::selection{
+  background:var(--wine);
+  color:var(--white);
+}
+
+
+/* =========================
+   LOADER
+========================= */
+
+.loader{
+  position:fixed;
+  inset:0;
+  background:var(--deep);
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  transition:.8s var(--ease);
+}
+
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loader-inner{
+  text-align:center;
+  color:var(--ivory);
+}
+
+.loader-mark{
+  font-size:36px;
+  color:var(--gold2);
+  margin-bottom:8px;
+}
+
+.loader-name{
+  font:500 28px var(--serif);
+  letter-spacing:.14em;
+}
+
+.loader-sub{
+  font:600 9px var(--sans);
+  letter-spacing:.35em;
+  margin-top:8px;
+  opacity:.75;
+}
+
+.loader-line{
+  width:90px;
+  height:1px;
+  background:var(--gold);
+  margin:24px auto 0;
+  transform-origin:left;
+  animation:load 1.5s var(--ease) infinite;
+}
+
+@keyframes load{
+  to{
+    transform:scaleX(1);
+  }
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:82px;
+  z-index:1000;
+
+  padding:0 5vw;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  color:var(--white);
+
+  transition:.5s var(--ease);
+}
+
+.site-header.scrolled{
+  height:68px;
+
+  background:rgba(247,241,231,.96);
+
+  color:var(--ink);
+
+  box-shadow:0 8px 30px rgba(40,20,15,.08);
+
+  backdrop-filter:blur(14px);
+}
+
+
+/* BRAND */
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  z-index:2;
+}
+
+.brand-emblem{
+  width:31px;
+  height:31px;
+
+  border:1px solid currentColor;
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  font:20px var(--serif);
+
+  transform:rotate(45deg);
+}
+
+.brand-emblem span{
+  transform:rotate(-45deg);
+}
+
+.brand-text{
+  font:500 25px var(--serif);
+  letter-spacing:.15em;
+}
+
+.brand-text small{
+  display:block;
+
+  font:600 7px var(--sans);
+
+  letter-spacing:.32em;
+
+  text-align:center;
+
+  margin-top:-3px;
+}
+
+
+/* NAV */
+
+.nav{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.nav a{
+  font-size:10px;
+  letter-spacing:.17em;
+  font-weight:600;
+
+  position:relative;
+
+  padding:8px 0;
+}
+
+.nav a:after{
+  content:"";
+
+  position:absolute;
+
+  bottom:1px;
+  left:0;
+
+  width:0;
+  height:1px;
+
+  background:var(--gold);
+
+  transition:.4s;
+}
+
+.nav a:hover:after,
+.nav a.active:after{
+  width:100%;
+}
+
+.header-book{
+  border:1px solid currentColor;
+  padding:10px 17px!important;
+}
+
+.header-book:after{
+  display:none;
+}
+
+
+/* MOBILE BUTTON */
+
+.menu-toggle{
+  display:none;
+
+  border:0;
+  background:none;
+
+  color:inherit;
+
+  width:40px;
+  height:40px;
+
+  position:relative;
+
+  z-index:3;
+}
+
+.menu-toggle i,
+.menu-toggle i:after{
+  content:"";
+
+  display:block;
+
+  width:23px;
+  height:1px;
+
+  background:currentColor;
+
+  position:absolute;
+
+  left:8px;
+  top:16px;
+
+  transition:.4s;
+}
+
+.menu-toggle i:after{
+  left:0;
+  top:8px;
+}
+
+.menu-toggle.open i{
+  transform:rotate(45deg);
+}
+
+.menu-toggle.open i:after{
+  top:0;
+  transform:rotate(90deg);
+}
+
+
+/* MOBILE MENU */
+
+.mobile-menu{
+  position:fixed;
+  inset:0;
+
+  background:var(--deep);
+  color:var(--ivory);
+
+  z-index:999;
+
+  display:flex;
+  align-items:center;
+
+  padding:90px 9vw;
+
+  transform:translateY(-100%);
+
+  transition:transform .7s var(--ease);
+}
+
+.mobile-menu.open{
+  transform:none;
+}
+
+.mobile-links{
+  display:grid;
+  gap:12px;
+}
+
+.mobile-links a{
+  font:500 clamp(35px,9vw,72px) var(--serif);
+  line-height:1.05;
+}
+
+.mobile-links span{
+  font:9px var(--sans);
+  letter-spacing:.3em;
+
+  color:var(--gold2);
+
+  margin-left:8px;
+}
+
+.mobile-deco{
+  position:absolute;
+
+  right:8vw;
+  bottom:8vh;
+
+  font:170px var(--serif);
+
+  color:rgba(214,184,120,.12);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100vh;
+
+  position:relative;
+
+  color:var(--white);
+
+  display:flex;
+  align-items:flex-end;
+
+  padding:0 7vw 9vh;
+
+  overflow:hidden;
+}
+
+.hero-media{
+  position:absolute;
+  inset:0;
+}
+
+.hero-media:after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(25,7,10,.72),
+      rgba(25,7,10,.12) 65%,
+      rgba(25,7,10,.2)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(20,7,9,.65),
+      transparent 55%
+    );
+}
+
+.hero-content{
+  position:relative;
+
+  z-index:1;
+
+  max-width:780px;
+}
+
+.eyebrow{
+  font-size:10px;
+
+  letter-spacing:.28em;
+
+  font-weight:600;
+
+  color:var(--gold2);
+
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font:500 clamp(48px,7vw,92px)/.95 var(--serif);
+
+  letter-spacing:-.025em;
+
+  max-width:760px;
+}
+
+.hero h1 em,
+.section-title em,
+.aari-copy h2 em,
+.booking-intro h2 em,
+.contact-copy h2 em{
+  font-family:var(--script);
+
+  font-weight:400;
+
+  color:var(--gold2);
+}
+
+.hero-copy{
+  font-size:15px;
+
+  max-width:520px;
+
+  margin:23px 0 28px;
+
+  color:rgba(255,253,249,.82);
+}
+
+
+/* CTA */
+
+.cta{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:20px;
+
+  border:1px solid rgba(255,255,255,.55);
+
+  padding:13px 18px;
+
+  color:var(--white);
+
+  font-size:10px;
+
+  letter-spacing:.2em;
+
+  font-weight:600;
+
+  transition:.35s;
+}
+
+.cta:hover{
+  background:var(--white);
+
+  color:var(--wine);
+}
+
+.hero-scroll{
+  position:absolute;
+
+  right:6vw;
+  bottom:8vh;
+
+  writing-mode:vertical-rl;
+
+  font-size:9px;
+
+  letter-spacing:.28em;
+
+  opacity:.8;
+}
+
+.hero-scroll:after{
+  content:"";
+
+  display:block;
+
+  width:1px;
+  height:50px;
+
+  background:var(--gold);
+
+  margin:12px auto 0;
+}
+
+.hero-number{
+  position:absolute;
+
+  right:7vw;
+  top:50%;
+
+  font:18px var(--serif);
+
+  color:var(--gold2);
+}
+
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.section{
+  padding:105px 7vw;
+}
+
+.section-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:end;
+
+  margin-bottom:52px;
+}
+
+.kicker{
+  font-size:9px;
+
+  letter-spacing:.3em;
+
+  color:var(--wine);
+
+  font-weight:700;
+
+  margin-bottom:9px;
+}
+
+.section-title{
+  font:500 clamp(35px,4.5vw,60px)/1 var(--serif);
+
+  letter-spacing:-.02em;
+}
+
+.section-title em{
+  color:var(--wine);
+}
+
+.section-intro{
+  max-width:360px;
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+.gold-rule{
+  width:48px;
+
+  height:1px;
+
+  background:var(--gold);
+
+  margin-top:18px;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+  background:var(--white);
+}
+
+.about-grid{
+  display:grid;
+
+  grid-template-columns:1.05fr .95fr;
+
+  gap:8vw;
+
+  align-items:center;
+}
+
+.about-image{
+  height:590px;
+
+  position:relative;
+}
+
+.about-image:before{
+  content:"";
+
+  position:absolute;
+
+  inset:18px -18px -18px 18px;
+
+  border:1px solid var(--gold);
+
+  z-index:0;
+}
+
+.about-image img{
+  position:relative;
+
+  z-index:1;
+}
+
+.about-copy h3{
+  font:500 37px/1.15 var(--serif);
+
+  margin-bottom:22px;
+}
+
+.about-copy h3 em{
+  font-family:var(--script);
+
+  color:var(--wine);
+
+  font-weight:400;
+}
+
+.about-copy p{
+  font-size:14px;
+
+  color:var(--muted);
+
+  max-width:510px;
+
+  margin-bottom:16px;
+}
+
+.signature{
+  font:38px var(--script);
+
+  color:var(--wine);
+
+  margin-top:24px;
+}
+
+
+/* =========================
+   COLLECTIONS
+========================= */
+
+.collections{
+  background:var(--deep);
+
+  color:var(--ivory);
+}
+
+.collections .kicker{
+  color:var(--gold2);
+}
+
+.collection-grid{
+  display:grid;
+
+  grid-template-columns:1.15fr .85fr .85fr;
+
+  gap:17px;
+}
+
+.collection-card{
+  position:relative;
+
+  height:570px;
+
+  overflow:hidden;
+
+  cursor:pointer;
+
+  transition:transform .2s ease;
+}
+
+.collection-card:nth-child(2),
+.collection-card:nth-child(3){
+  height:430px;
+
+  margin-top:70px;
+}
+
+.collection-card img{
+  transition:transform 1.2s var(--ease);
+
+  filter:saturate(.9);
+}
+
+.collection-card:hover img{
+  transform:scale(1.07);
+}
+
+.collection-card:after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(20,5,8,.8),
+      transparent 58%
+    );
+}
+
+.collection-info{
+  position:absolute;
+
+  z-index:2;
+
+  left:28px;
+  right:22px;
+  bottom:26px;
+}
+
+.collection-no{
+  font-size:9px;
+
+  letter-spacing:.25em;
+
+  color:var(--gold2);
+}
+
+.collection-name{
+  font:500 38px var(--serif);
+
+  margin:6px 0;
+}
+
+.collection-desc{
+  font-size:12px;
+
+  opacity:.78;
+
+  max-width:270px;
+}
+
+.collection-arrow{
+  position:absolute;
+
+  right:22px;
+  bottom:30px;
+
+  border:1px solid rgba(214,184,120,.6);
+
+  width:40px;
+  height:40px;
+
+  border-radius:50%;
+
+  display:grid;
+
+  place-items:center;
+
+  color:var(--gold2);
+
+  transition:.4s;
+}
+
+.collection-card:hover .collection-arrow{
+  background:var(--gold);
+
+  color:var(--deep);
+
+  transform:rotate(45deg);
+}
+
+
+/* =========================
+   AARI
+========================= */
+
+.aari{
+  background:var(--sand);
+}
+
+.aari-grid{
+  display:grid;
+
+  grid-template-columns:.9fr 1.1fr;
+
+  gap:7vw;
+
+  align-items:center;
+}
+
+.aari-image{
+  height:570px;
+
+  position:relative;
+}
+
+.aari-image img{
+  box-shadow:var(--shadow);
+}
+
+.aari-tag{
+  position:absolute;
+
+  right:-34px;
+  bottom:38px;
+
+  background:var(--wine);
+
+  color:var(--ivory);
+
+  padding:20px 25px;
+
+  z-index:2;
+}
+
+.aari-tag strong{
+  display:block;
+
+  font:25px var(--serif);
+}
+
+.aari-tag span{
+  font-size:8px;
+
+  letter-spacing:.2em;
+
+  color:var(--gold2);
+}
+
+.aari-copy h2{
+  font:500 clamp(38px,5vw,67px)/1 var(--serif);
+
+  max-width:580px;
+}
+
+.aari-copy h2 em{
+  color:var(--wine);
+}
+
+.aari-copy>p{
+  color:var(--muted);
+
+  max-width:500px;
+
+  margin:25px 0;
+}
+
+.details{
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  border-top:1px solid var(--line);
+
+  margin-top:35px;
+}
+
+.detail{
+  padding:19px 0;
+
+  border-bottom:1px solid var(--line);
+
+  font-size:12px;
+}
+
+.detail b{
+  font:500 21px var(--serif);
+
+  display:block;
+
+  color:var(--wine);
+
+  margin-bottom:2px;
+}
+
+
+/* =========================
+   FEATURE
+========================= */
+
+.feature{
+  padding:0;
+
+  position:relative;
+
+  height:650px;
+
+  color:var(--white);
+
+  overflow:hidden;
+}
+
+.feature img{
+  transition:transform 1.5s var(--ease);
+}
+
+.feature:hover img{
+  transform:scale(1.04);
+}
+
+.feature:after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35,10,15,.7),
+      transparent 75%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(15,5,7,.5),
+      transparent 50%
+    );
+}
+
+.feature-content{
+  position:absolute;
+
+  z-index:2;
+
+  left:9vw;
+  bottom:72px;
+}
+
+.feature-content .kicker{
+  color:var(--gold2);
+}
+
+.feature h2{
+  font:500 clamp(42px,5.5vw,74px) var(--serif);
+
+  max-width:700px;
+}
+
+.feature-meta{
+  display:flex;
+
+  gap:30px;
+
+  font-size:9px;
+
+  letter-spacing:.18em;
+
+  margin:18px 0 24px;
+
+  opacity:.8;
+}
+
+
+/* =========================
+   DESIGNERS
+========================= */
+
+.designers{
+  background:var(--white);
+}
+
+.designer-list{
+  border-top:1px solid var(--line);
+}
+
+.designer{
+  display:grid;
+
+  grid-template-columns:70px 1fr 280px 60px;
+
+  gap:25px;
+
+  align-items:center;
+
+  padding:25px 0;
+
+  border-bottom:1px solid var(--line);
+
+  cursor:pointer;
+
+  transition:.45s;
+}
+
+.designer:hover{
+  padding-left:18px;
+
+  background:rgba(181,138,74,.05);
+}
+
+.designer-num{
+  font:24px var(--serif);
+
+  color:var(--gold);
+}
+
+.designer h3{
+  font:500 30px var(--serif);
+}
+
+.designer p{
+  font-size:12px;
+
+  color:var(--muted);
+}
+
+.designer-arrow{
+  font-size:22px;
+
+  color:var(--wine);
+
+  transition:.4s;
+}
+
+.designer:hover .designer-arrow{
+  transform:translateX(8px);
+}
+
+.designer-preview{
+  position:fixed;
+
+  width:220px;
+  height:285px;
+
+  pointer-events:none;
+
+  z-index:1500;
+
+  opacity:0;
+
+  transform:translate(-50%,-50%) scale(.8);
+
+  transition:
+    opacity .25s,
+    transform .5s var(--ease);
+
+  box-shadow:var(--shadow);
+}
+
+.designer-preview.show{
+  opacity:1;
+
+  transform:translate(-50%,-50%) scale(1);
+}
+
+
+/* =========================
+   LOOKBOOK
+========================= */
+
+.lookbook{
+  background:var(--wine);
+
+  color:var(--ivory);
+
+  padding-bottom:115px;
+}
+
+.lookbook-grid{
+  display:grid;
+
+  grid-template-columns:1fr 1fr 1fr;
+
+  gap:16px;
+}
+
+.look{
+  height:390px;
+
+  overflow:hidden;
+
+  position:relative;
+}
+
+.look:first-child{
+  height:500px;
+}
+
+.look:nth-child(2){
+  margin-top:110px;
+
+  height:420px;
+}
+
+.look:nth-child(3){
+  height:460px;
+}
+
+.look img{
+  transition:1s var(--ease);
+}
+
+.look:hover img{
+  transform:scale(1.06);
+}
+
+.look-label{
+  position:absolute;
+
+  left:18px;
+  bottom:16px;
+
+  font:22px var(--serif);
+
+  text-shadow:0 2px 12px #000;
+}
+
+
+/* =========================
+   BOOKING
+========================= */
+
+.booking{
+  background:var(--ivory);
+}
+
+.booking-wrap{
+  display:grid;
+
+  grid-template-columns:.8fr 1.2fr;
+
+  gap:7vw;
+}
+
+.booking-intro h2{
+  font:500 clamp(40px,5vw,68px)/1.05 var(--serif);
+}
+
+.booking-intro h2 em{
+  color:var(--wine);
+}
+
+.booking-intro p{
+  font-size:14px;
+
+  color:var(--muted);
+
+  max-width:410px;
+
+  margin:24px 0;
+}
+
+.booking-note{
+  border-left:2px solid var(--gold);
+
+  padding-left:18px;
+
+  font-size:11px;
+
+  color:var(--muted);
+}
+
+.form{
+  background:var(--white);
+
+  padding:42px;
+
+  box-shadow:var(--shadow);
+}
+
+.form-row{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:25px;
+}
+
+.field{
+  margin-bottom:23px;
+}
+
+.field label{
+  display:block;
+
+  font-size:9px;
+
+  letter-spacing:.2em;
+
+  font-weight:700;
+
+  color:var(--wine);
+
+  margin-bottom:8px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+
+  border:0;
+
+  border-bottom:1px solid rgba(36,26,23,.22);
+
+  background:transparent;
+
+  padding:11px 0;
+
+  outline:0;
+
+  color:var(--ink);
+
+  font:14px var(--sans);
+
+  border-radius:0;
+}
+
+.field textarea{
+  height:75px;
+
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--gold);
+}
+
+.form button{
+  border:0;
+
+  background:var(--wine);
+
+  color:var(--white);
+
+  padding:15px 23px;
+
+  letter-spacing:.18em;
+
+  font-size:9px;
+
+  cursor:pointer;
+
+  transition:.35s;
+}
+
+.form button:hover{
+  background:var(--deep);
+
+  transform:translateY(-2px);
+}
+
+.form-message{
+  font-size:12px;
+
+  color:var(--wine);
+
+  margin-top:14px;
+
+  display:none;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+  background:var(--white);
+}
+
+.contact-grid{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:7vw;
+
+  align-items:center;
+}
+
+.contact-image{
+  height:550px;
+}
+
+.contact-copy h2{
+  font:500 clamp(43px,5vw,72px)/1.05 var(--serif);
+}
+
+.contact-copy h2 em{
+  color:var(--wine);
+}
+
+.contact-info{
+  margin-top:35px;
+
+  border-top:1px solid var(--line);
+}
+
+.contact-item{
+  display:flex;
+
+  justify-content:space-between;
+
+  padding:17px 0;
+
+  border-bottom:1px solid var(--line);
+
+  font-size:12px;
+}
+
+.contact-item span:first-child{
+  color:var(--muted);
+
+  font-size:9px;
+
+  letter-spacing:.18em;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  background:var(--deep);
+
+  color:var(--ivory);
+
+  padding:65px 7vw 25px;
+}
+
+.footer-top{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:end;
+
+  padding-bottom:50px;
+
+  border-bottom:1px solid rgba(247,241,231,.16);
+}
+
+.footer-brand{
+  font:500 55px var(--serif);
+
+  letter-spacing:.12em;
+}
+
+.footer-brand small{
+  display:block;
+
+  font:600 8px var(--sans);
+
+  letter-spacing:.35em;
+
+  color:var(--gold2);
+}
+
+.footer-quote{
+  font:23px/1.3 var(--serif);
+
+  max-width:330px;
+
+  text-align:right;
+}
+
+.footer-bottom{
+  display:flex;
+
+  justify-content:space-between;
+
+  padding-top:20px;
+
+  font-size:9px;
+
+  letter-spacing:.12em;
+
+  color:rgba(247,241,231,.58);
+}
+
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+
+  transform:translateY(35px);
+
+  transition:
+    opacity .9s var(--ease),
+    transform .9s var(--ease);
+}
+
+.reveal.visible{
+  opacity:1;
+
+  transform:none;
+}
+
+.delay-1{
+  transition-delay:.1s;
+}
+
+.delay-2{
+  transition-delay:.2s;
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+
+  right:25px;
+  bottom:25px;
+
+  background:var(--deep);
+
+  color:var(--ivory);
+
+  padding:14px 18px;
+
+  z-index:2000;
+
+  font-size:11px;
+
+  box-shadow:var(--shadow);
+
+  transform:translateY(120px);
+
+  transition:.5s var(--ease);
+}
+
+.toast.show{
+  transform:none;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:1000px){
+
+  .nav{
+    display:none;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .site-header{
+    padding:0 5vw;
+  }
+
+  .about-grid,
+  .aari-grid,
+  .booking-wrap,
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-image{
+    height:520px;
+  }
+
+  .aari-image{
+    height:500px;
+  }
+
+  .collection-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .collection-card:first-child{
+    grid-row:span 2;
+
+    height:600px;
+  }
+
+  .collection-card:nth-child(2),
+  .collection-card:nth-child(3){
+    margin-top:0;
+
+    height:290px;
+  }
+
+  .designer{
+    grid-template-columns:55px 1fr 50px;
+  }
+
+  .designer p{
+    display:none;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+  .site-header{
+    height:70px;
+  }
+
+  .site-header.scrolled{
+    height:62px;
+  }
+
+  .brand-text{
+    font-size:21px;
+  }
+
+  .hero{
+    padding:0 7vw 7vh;
+
+    min-height:90vh;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .hero-copy{
+    font-size:13px;
+  }
+
+  .hero-number{
+    display:none;
+  }
+
+  .hero-scroll{
+    right:5vw;
+  }
+
+  .section{
+    padding:75px 6vw;
+  }
+
+  .section-head{
+    display:block;
+
+    margin-bottom:35px;
+  }
+
+  .section-intro{
+    margin-top:18px;
+  }
+
+  .about-image{
+    height:400px;
+  }
+
+  .about-image:before{
+    inset:10px -10px -10px 10px;
+  }
+
+  .about-copy h3{
+    font-size:31px;
+  }
+
+  .collection-grid{
+    grid-template-columns:1fr;
+  }
+
+  .collection-card,
+  .collection-card:first-child,
+  .collection-card:nth-child(2),
+  .collection-card:nth-child(3){
+    height:430px;
+  }
+
+  .aari-image{
+    height:390px;
+  }
+
+  .aari-tag{
+    right:10px;
+
+    bottom:15px;
+  }
+
+  .feature{
+    height:520px;
+  }
+
+  .feature-content{
+    left:7vw;
+
+    bottom:45px;
+  }
+
+  .feature-meta{
+    gap:15px;
+
+    flex-wrap:wrap;
+  }
+
+  .designer{
+    grid-template-columns:45px 1fr 30px;
+  }
+
+  .designer h3{
+    font-size:24px;
+  }
+
+  .designer-preview{
+    display:none;
+  }
+
+  .lookbook-grid{
+    grid-template-columns:1fr;
+  }
+
+  .look,
+  .look:first-child,
+  .look:nth-child(2),
+  .look:nth-child(3){
+    height:430px;
+
+    margin:0;
+  }
+
+  .form{
+    padding:25px;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+
+    gap:0;
+  }
+
+  .contact-image{
+    height:400px;
+  }
+
+  .footer-top{
+    display:block;
+  }
+
+  .footer-quote{
+    text-align:left;
+
+    margin-top:25px;
+  }
+
+  .footer-brand{
+    font-size:43px;
+  }
+
+  .footer-bottom{
+    display:block;
+
+    line-height:2;
+  }
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    scroll-behavior:auto!important;
+
+    animation:none!important;
+
+    transition-duration:.01ms!important;
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     LOADER
+========================= -->
+
+<div class="loader" id="loader">
+
+  <div class="loader-inner">
+
+    <div class="loader-mark">✦</div>
+
+    <div class="loader-name">
+      VARNAM
+    </div>
+
+    <div class="loader-sub">
+      DESIGNER ATELIER
+    </div>
+
+    <div class="loader-line"></div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="site-header" id="header">
+
+  <a class="brand" href="#home">
+
+    <div class="brand-emblem">
+      <span>V</span>
+    </div>
+
+    <div class="brand-text">
+      VARNAM
+      <small>DESIGNER ATELIER</small>
+    </div>
+
+  </a>
+
+
+  <nav class="nav">
+
+    <a href="#home">
+      HOME
+    </a>
+
+    <a href="#about">
+      ABOUT
+    </a>
+
+    <a href="#collections">
+      COLLECTIONS
+    </a>
+
+    <a href="#designers">
+      DESIGNERS
+    </a>
+
+    <a href="#booking" class="header-book">
+      BOOKING
+    </a>
+
+    <a href="#contact">
+      CONTACT
+    </a>
+
+  </nav>
+
+
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    aria-label="Open menu">
+
+    <i></i>
+
+  </button>
+
+</header>
+
+
+
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+  <nav class="mobile-links">
+
+    <a href="#home">
+      <span>01</span> HOME
+    </a>
+
+    <a href="#about">
+      <span>02</span> ABOUT
+    </a>
+
+    <a href="#collections">
+      <span>03</span> COLLECTIONS
+    </a>
+
+    <a href="#designers">
+      <span>04</span> DESIGNERS
+    </a>
+
+    <a href="#booking">
+      <span>05</span> BOOKING
+    </a>
+
+    <a href="#contact">
+      <span>06</span> CONTACT
+    </a>
+
+  </nav>
+
+  <div class="mobile-deco">
+    ✦
+  </div>
+
+</div>
+
+
+
+<main>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-media">
+
+    <img
+      src="hero.jpg"
+      alt="Traditional silk saree">
+
+  </div>
+
+
+  <div class="hero-content reveal">
+
+    <div class="eyebrow">
+      DESIGNER SAREES · AARI BLOUSES · DHAVANIS
+    </div>
+
+    <h1>
+      The art of <em>wearing</em> tradition.
+    </h1>
+
+    <p class="hero-copy">
+      Timeless textiles, intricate craftsmanship and contemporary design — created for the moments that become memories.
+    </p>
+
+    <a class="cta" href="#collections">
+      EXPLORE THE COLLECTION
+      <span>↗</span>
+    </a>
+
+  </div>
+
+
+  <div class="hero-scroll">
+    SCROLL TO DISCOVER
+  </div>
+
+
+  <div class="hero-number">
+    01
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="section about" id="about">
+
+  <div class="section-head reveal">
+
+    <div>
+
+      <div class="kicker">
+        01 — OUR STORY
+      </div>
+
+      <h2 class="section-title">
+        Rooted in <em>heritage.</em>
+      </h2>
+
+      <div class="gold-rule"></div>
+
+    </div>
+
+
+    <p class="section-intro">
+      A designer atelier where South Indian tradition meets a modern eye for detail, proportion and elegance.
+    </p>
+
+  </div>
+
+
+
+  <div class="about-grid">
+
+
+    <div class="about-image reveal">
+
+      <img
+        src="about.jpg"
+        alt="Elegant saree detail">
+
+    </div>
+
+
+    <div class="about-copy reveal delay-1">
+
+      <h3>
+        We believe tradition should be
+        <em>lived,</em>
+        not preserved behind glass.
+      </h3>
+
+      <p>
+        VARNAM is a designer atelier devoted to the beauty of Indian textiles and the artistry of the hands behind them.
+      </p>
+
+      <p>
+        From lustrous silk sarees to hand-finished Aari blouses and graceful dhavanis, every creation begins with respect for craft and ends with a distinctly personal expression.
+      </p>
+
+      <p>
+        Our collections are designed for brides, celebrations and everyday heirlooms — pieces that feel deeply rooted yet unmistakably yours.
+      </p>
+
+      <div class="signature">
+        crafted with intention
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     COLLECTIONS
+========================= -->
+
+<section class="section collections" id="collections">
+
+  <div class="section-head reveal">
+
+    <div>
+
+      <div class="kicker">
+        02 — THE COLLECTION
+      </div>
+
+      <h2 class="section-title">
+        Three expressions.
+        <em>One heritage.</em>
+      </h2>
+
+      <div class="gold-rule"></div>
+
+    </div>
+
+    <p class="section-intro">
+      Explore our signature worlds of silk, embroidery and tradition — each interpreted through a contemporary design language.
+    </p>
+
+  </div>
+
+
+
+  <div class="collection-grid">
+
+
+    <article class="collection-card reveal">
+
+      <img
+        src="col1.jpg"
+        alt="Designer silk saree">
+
+      <div class="collection-info">
+
+        <div class="collection-no">
+          01 / SAREES
+        </div>
+
+        <div class="collection-name">
+          Silk Stories
+        </div>
+
+        <div class="collection-desc">
+          Kanchipuram-inspired silks, statement zari and heirloom-worthy drapes.
+        </div>
+
+      </div>
+
+      <div class="collection-arrow">
+        ↗
+      </div>
+
+    </article>
+
+
+
+    <article class="collection-card reveal delay-1">
+
+      <img
+        src="col2.jpg"
+        alt="Traditional embroidered blouse">
+
+      <div class="collection-info">
+
+        <div class="collection-no">
+          02 / BLOUSES
+        </div>
+
+        <div class="collection-name">
+          Aari Royale
+        </div>
+
+        <div class="collection-desc">
+          Hand-finished embroidery designed around your silhouette and story.
+        </div>
+
+      </div>
+
+      <div class="collection-arrow">
+        ↗
+      </div>
+
+    </article>
+
+
+
+    <article class="collection-card reveal delay-2">
+
+      <img
+        src="col3.jpg"
+        alt="Traditional Indian fashion">
+
+      <div class="collection-info">
+
+        <div class="collection-no">
+          03 / DHAVANIS
+        </div>
+
+        <div class="collection-name">
+          The Dhavani Edit
+        </div>
+
+        <div class="collection-desc">
+          A graceful return to a silhouette that belongs to every generation.
+        </div>
+
+      </div>
+
+      <div class="collection-arrow">
+        ↗
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     AARI
+========================= -->
+
+<section class="section aari">
+
+  <div class="aari-grid">
+
+
+    <div class="aari-image reveal">
+
+      <img
+        src="aari.jpg"
+        alt="Embroidery and textile detail">
+
+      <div class="aari-tag">
+
+        <strong>
+          HAND FINISHED
+        </strong>
+
+        <span>
+          THREAD · ZARI · DETAIL
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="aari-copy reveal delay-1">
+
+      <div class="kicker">
+        03 — THE ART OF AARI
+      </div>
+
+      <h2>
+        Thread by thread, made with
+        <em>patience.</em>
+      </h2>
+
+      <p>
+        Aari work transforms a blouse into something personal. Our embroidery is built slowly — motif by motif, stitch by stitch — with attention to the smallest detail.
+      </p>
+
+
+      <div class="details">
+
+
+        <div class="detail">
+
+          <b>
+            Zari Work
+          </b>
+
+          Antique gold &amp; classic metallic detailing
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Thread Work
+          </b>
+
+          Layered colour and delicate texture
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Bridal Motifs
+          </b>
+
+          Peacocks, florals &amp; temple-inspired forms
+
+        </div>
+
+
+        <div class="detail">
+
+          <b>
+            Custom Design
+          </b>
+
+          Created around your saree &amp; occasion
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     FEATURED COLLECTION
+========================= -->
+
+<section class="feature" id="signature">
+
+  <img
+    src="kanchi.jpg"
+    alt="Signature silk saree">
+
+
+  <div class="feature-content reveal">
+
+    <div class="kicker">
+      04 — SIGNATURE SERIES
+    </div>
+
+    <h2>
+      The Kanchi Edit
+    </h2>
+
+    <div class="feature-meta">
+
+      <span>
+        PURE SILK
+      </span>
+
+      <span>
+        STATEMENT ZARI
+      </span>
+
+      <span>
+        LIMITED COLLECTION
+      </span>
+
+    </div>
+
+
+    <a class="cta" href="#booking">
+
+      ENQUIRE ABOUT THIS EDIT
+
+      <span>↗</span>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     DESIGNERS
+========================= -->
+
+<section class="section designers" id="designers">
+
+  <div class="section-head reveal">
+
+    <div>
+
+      <div class="kicker">
+        05 — THE PEOPLE
+      </div>
+
+      <h2 class="section-title">
+        The hands behind the
+        <em>art.</em>
+      </h2>
+
+      <div class="gold-rule"></div>
+
+    </div>
+
+
+    <p class="section-intro">
+      Designers, embroiderers and textile curators working together to give every piece its character.
+    </p>
+
+  </div>
+
+
+
+  <div class="designer-list">
+
+
+    <div
+      class="designer reveal"
+      data-preview="w1.jpg">
+
+      <div class="designer-num">
+        01
+      </div>
+
+      <h3>
+        Master Design
+      </h3>
+
+      <p>
+        Silhouette · Draping · Collection Direction
+      </p>
+
+      <div class="designer-arrow">
+        →
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="designer reveal delay-1"
+      data-preview="w2.jpg">
+
+      <div class="designer-num">
+        02
+      </div>
+
+      <h3>
+        Aari Atelier
+      </h3>
+
+      <p>
+        Hand Embroidery · Zari · Bridal Craft
+      </p>
+
+      <div class="designer-arrow">
+        →
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="designer reveal delay-2"
+      data-preview="w3.jpg">
+
+      <div class="designer-num">
+        03
+      </div>
+
+      <h3>
+        Textile Curation
+      </h3>
+
+      <p>
+        Silk · Weaves · Colour &amp; Zari Selection
+      </p>
+
+      <div class="designer-arrow">
+        →
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="designer-preview" id="designerPreview">
+
+    <img src="" alt="">
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     LOOKBOOK
+========================= -->
+
+<section class="section lookbook">
+
+  <div class="section-head reveal">
+
+    <div>
+
+      <div class="kicker">
+        06 — LOOKBOOK
+      </div>
+
+      <h2 class="section-title">
+        Made for
+        <em>moments.</em>
+      </h2>
+
+      <div class="gold-rule"></div>
+
+    </div>
+
+
+    <p class="section-intro">
+      Bridal mornings, festive evenings and the quiet occasions that become part of your story.
+    </p>
+
+  </div>
+
+
+
+  <div class="lookbook-grid">
+
+
+    <div class="look reveal">
+
+      <img
+        src="bridal.jpg"
+        alt="Indian bridal fashion">
+
+      <div class="look-label">
+        Bridal Heirlooms
+      </div>
+
+    </div>
+
+
+    <div class="look reveal delay-1">
+
+      <img
+        src="festive.jpg"
+        alt="Traditional saree style">
+
+      <div class="look-label">
+        Festive Drapes
+      </div>
+
+    </div>
+
+
+    <div class="look reveal delay-2">
+
+      <img
+        src="modern.jpg"
+        alt="Elegant textile fashion">
+
+      <div class="look-label">
+        Modern Heritage
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     BOOKING
+========================= -->
+
+<section class="section booking" id="booking">
+
+  <div class="booking-wrap">
+
+
+    <div class="booking-intro reveal">
+
+      <div class="kicker">
+        07 — PRIVATE APPOINTMENTS
+      </div>
+
+      <h2>
+        Your occasion.<br>
+        Your <em>creation.</em>
+      </h2>
+
+      <p>
+        Visit the atelier for a personal consultation. Explore textiles, discuss embroidery, find your silhouette and create something made especially for you.
+      </p>
+
+      <div class="booking-note">
+        Appointments are available for bridal, festive and bespoke requirements.
+      </div>
+
+    </div>
+
+
+
+    <form class="form reveal delay-1" id="bookingForm">
+
+
+      <div class="form-row">
+
+
+        <div class="field">
+
+          <label>
+            YOUR NAME
+          </label>
+
+          <input
+            required
+            type="text"
+            placeholder="Enter your name">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            PHONE
+          </label>
+
+          <input
+            required
+            type="tel"
+            placeholder="+91">
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="form-row">
+
+
+        <div class="field">
+
+          <label>
+            APPOINTMENT TYPE
+          </label>
+
+          <select required>
+
+            <option value="">
+              Select an option
+            </option>
+
+            <option>
+              Bridal Consultation
+            </option>
+
+            <option>
+              Bespoke Aari Blouse
+            </option>
+
+            <option>
+              Saree Styling
+            </option>
+
+            <option>
+              Dhavani Consultation
+            </option>
+
+            <option>
+              Collection Preview
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            PREFERRED DATE
+          </label>
+
+          <input
+            required
+            type="date">
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+          OCCASION / REQUIREMENT
+        </label>
+
+        <textarea
+          placeholder="Tell us a little about what you are looking for..."></textarea>
+
+      </div>
+
+
+      <button type="submit">
+        REQUEST APPOINTMENT &nbsp; ↗
+      </button>
+
+
+      <div class="form-message" id="formMessage">
+        Thank you. Your appointment request has been received.
+      </div>
+
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="section contact" id="contact">
+
+  <div class="contact-grid">
+
+
+    <div class="contact-image reveal">
+
+      <img
+        src="foot.jpg"
+        alt="Traditional saree textile">
+
+    </div>
+
+
+
+    <div class="contact-copy reveal delay-1">
+
+      <div class="kicker">
+        08 — VISIT THE ATELIER
+      </div>
+
+      <h2>
+        Come see the craft
+        <em>up close.</em>
+      </h2>
+
+      <p style="color:var(--muted);max-width:430px;margin:24px 0">
+        A space for silk, embroidery, conversations and creations that begin with a single idea.
+      </p>
+
+
+      <div class="contact-info">
+
+
+        <div class="contact-item">
+
+          <span>
+            ATELIER
+          </span>
+
+          <strong>
+            Madurai · Tamil Nadu
+          </strong>
+
+        </div>
+
+
+        <div class="contact-item">
+
+          <span>
+            PHONE
+          </span>
+
+          <strong>
+            +91 98765 43210
+          </strong>
+
+        </div>
+
+
+        <div class="contact-item">
+
+          <span>
+            EMAIL
+          </span>
+
+          <strong>
+            hello@varnamatelier.in
+          </strong>
+
+        </div>
+
+
+        <div class="contact-item">
+
+          <span>
+            INSTAGRAM
+          </span>
+
+          <strong>
+            @varnam.atelier
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <a
+        class="cta"
+        style="margin-top:25px;background:var(--wine);border-color:var(--wine)"
+        href="#booking">
+
+        BOOK A PRIVATE APPOINTMENT
+
+        <span>↗</span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+
+  <div class="footer-top">
+
+
+    <div>
+
+      <div class="footer-brand">
+
+        VARNAM
+
+        <small>
+          DESIGNER ATELIER
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-quote">
+
+      “Tradition becomes timeless when it is made personal.”
+
+    </div>
+
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 VARNAM DESIGNER ATELIER
+    </span>
+
+    <span>
+      DESIGNED WITH INTENTION · MADE WITH CRAFT
+    </span>
+
+  </div>
+
+
+</footer>
+
+
+
+<div class="toast" id="toast">
+  Appointment request received.
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+(() => {
+
+  const $ = selector =>
+    document.querySelector(selector);
+
+  const $$ = selector =>
+    [...document.querySelectorAll(selector)];
+
+
+  /* =========================
+     LOADER
+  ========================= */
+
+  const loader = $('#loader');
+
+  window.addEventListener('load', () => {
+
+    setTimeout(() => {
+
+      loader.classList.add('hide');
+
+    }, 500);
+
+  });
+
+
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  const header = $('#header');
+
+  window.addEventListener('scroll', () => {
+
+    header.classList.toggle(
+      'scrolled',
+      window.scrollY > 45
+    );
+
+  }, { passive:true });
+
+
+
+  /* =========================
+     MOBILE MENU
+  ========================= */
+
+  const toggle = $('#menuToggle');
+  const menu = $('#mobileMenu');
+
+  function closeMenu(){
+
+    toggle.classList.remove('open');
+
+    menu.classList.remove('open');
+
+    document.body.classList.remove('menu-open');
+
+  }
+
+
+  toggle.addEventListener('click', () => {
+
+    const open =
+      !menu.classList.contains('open');
+
+    toggle.classList.toggle('open',open);
+
+    menu.classList.toggle('open',open);
+
+    document.body.classList.toggle(
+      'menu-open',
+      open
+    );
+
+  });
+
+
+  $$('.mobile-links a')
+    .forEach(link => {
+
+      link.addEventListener(
+        'click',
+        closeMenu
+      );
+
+    });
+
+
+
+  /* =========================
+     SMOOTH SCROLL
+  ========================= */
+
+  $$('a[href^="#"]')
+    .forEach(link => {
+
+      link.addEventListener('click', event => {
+
+        const target =
+          $(link.getAttribute('href'));
+
+        if(target){
+
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+          });
+
+        }
+
+      });
+
+    });
+
+
+
+  /* =========================
+     SCROLL REVEALS
+  ========================= */
+
+  const revealObserver =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if(entry.isIntersecting){
+
+            entry.target.classList.add(
+              'visible'
+            );
+
+          }
+
+        });
+
+      },
+      {
+        threshold:.12,
+        rootMargin:'0px 0px -40px'
+      }
+    );
+
+
+  $$('.reveal')
+    .forEach(element =>
+      revealObserver.observe(element)
+    );
+
+
+
+  /* =========================
+     ACTIVE NAV
+  ========================= */
+
+  const navLinks =
+    $$('.nav a');
+
+  const sections =
+    $$('main section[id]');
+
+
+  const sectionObserver =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if(entry.isIntersecting){
+
+            navLinks.forEach(link => {
+
+              link.classList.toggle(
+                'active',
+                link.getAttribute('href') ===
+                '#' + entry.target.id
+              );
+
+            });
+
+          }
+
+        });
+
+      },
+      {
+        rootMargin:'-45% 0px -45% 0px'
+      }
+    );
+
+
+  sections.forEach(section =>
+    sectionObserver.observe(section)
+  );
+
+
+
+  /* =========================
+     HERO PARALLAX
+  ========================= */
+
+  const heroImage =
+    $('.hero-media img');
+
+
+  window.addEventListener('scroll', () => {
+
+    if(
+      window.scrollY <
+      window.innerHeight * 1.2
+    ){
+
+      heroImage.style.transform =
+        `translateY(${window.scrollY * .12}px) scale(1.04)`;
+
+    }
+
+  }, { passive:true });
+
+
+
+  /* =========================
+     DESIGNER IMAGE PREVIEW
+  ========================= */
+
+  const preview =
+    $('#designerPreview');
+
+
+  $$('.designer')
+    .forEach(item => {
+
+
+      item.addEventListener(
+        'mouseenter',
+        () => {
+
+          if(window.innerWidth <= 1000)
+            return;
+
+          preview.querySelector('img').src =
+            item.dataset.preview;
+
+          preview.classList.add('show');
+
+        }
+      );
+
+
+      item.addEventListener(
+        'mousemove',
+        event => {
+
+          if(window.innerWidth <= 1000)
+            return;
+
+          preview.style.left =
+            event.clientX + 'px';
+
+          preview.style.top =
+            event.clientY + 'px';
+
+        }
+      );
+
+
+      item.addEventListener(
+        'mouseleave',
+        () => {
+
+          preview.classList.remove(
+            'show'
+          );
+
+        }
+      );
+
+    });
+
+
+
+  /* =========================
+     COLLECTION CARD TILT
+  ========================= */
+
+  $$('.collection-card')
+    .forEach(card => {
+
+
+      card.addEventListener(
+        'mousemove',
+        event => {
+
+          if(window.innerWidth <= 1000)
+            return;
+
+
+          const rect =
+            card.getBoundingClientRect();
+
+
+          const x =
+            (event.clientX - rect.left) /
+            rect.width -
+            .5;
+
+
+          const y =
+            (event.clientY - rect.top) /
+            rect.height -
+            .5;
+
+
+          card.style.transform =
+            `perspective(900px)
+             rotateY(${x * 2}deg)
+             rotateX(${-y * 2}deg)`;
+
+        }
+      );
+
+
+      card.addEventListener(
+        'mouseleave',
+        () => {
+
+          card.style.transform = '';
+
+        }
+      );
+
+    });
+
+
+
+  /* =========================
+     BOOKING FORM
+  ========================= */
+
+  const form =
+    $('#bookingForm');
+
+  const message =
+    $('#formMessage');
+
+  const toast =
+    $('#toast');
+
+
+  form.addEventListener(
+    'submit',
+    event => {
+
+      event.preventDefault();
+
+
+      message.style.display =
+        'block';
+
+
+      toast.classList.add(
+        'show'
+      );
+
+
+      setTimeout(() => {
+
+        toast.classList.remove(
+          'show'
+        );
+
+      },3200);
+
+
+      form.reset();
+
+    }
+  );
+
+
+
+  /* =========================
+     DATE VALIDATION
+  ========================= */
+
+  const date =
+    form.querySelector(
+      'input[type="date"]'
+    );
+
+
+  date.min =
+    new Date()
+      .toISOString()
+      .split('T')[0];
+
+
+})();
+
+</script>
+
+</body>
+</html>
